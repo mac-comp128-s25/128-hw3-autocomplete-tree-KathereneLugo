@@ -24,7 +24,19 @@ public class PrefixTree {
      * @param word
      */
     public void add(String word){
-        //TODO: complete me
+        TreeNode currNode = root;
+        for (int i = 0; i < word.length(); i++) {
+            if (!currNode.children.containsKey(word.charAt(i))) {
+                TreeNode newChar = new TreeNode();
+                newChar.letter = word.charAt(i);
+                currNode.children.put(word.charAt(i), newChar);
+            }
+            currNode = currNode.children.get(word.charAt(i));
+        }
+        if(!currNode.isWord){
+            size++;
+        }
+        currNode.isWord = true;
     }
 
     /**
@@ -33,7 +45,21 @@ public class PrefixTree {
      * @return true if contained in the tree.
      */
     public boolean contains(String word){
-        //TODO: complete me
+        /*This should return true if the word is contained in the tree. 
+        Starting at the root, you can iterate through the word's characters 
+        searching down the path of nodes. If each character is found in the 
+        correct order and the last is marked as a word, then the word is 
+        contained in the tree. Once you complete this, 
+        the testContains method should pass. */
+        TreeNode currNode = root;
+        for (int i = 0; i < word.length(); i++) {
+            if(currNode.children.containsKey(word.charAt(i))){
+                currNode = currNode.children.get(word.charAt(i));
+            }
+        }
+        if(currNode.isWord){
+            return true;
+        }
         return false;
     }
 
@@ -44,8 +70,24 @@ public class PrefixTree {
      * @return list of words with prefix
      */
     public ArrayList<String> getWordsForPrefix(String prefix){
-        //TODO: complete me
+        //TODO: complete me preorder traversal and helper
+        /*This should return a list of words contained in the tree 
+        that start with the prefix characters, including the prefix 
+        if it is a word itself. These words can be found by 
+        traversing through the letters of the prefix and then 
+        traversing any child decendents of the last prefix node. 
+        There are multiple ways to implement this, but probably 
+        the easiest is to write a separate helper, recursive method 
+        to preorder-traverse the child decendents. Look in the BST 
+        activity for an example of a recursive pre-order traversal; 
+        however, note that this tree is not binary. */
+
+
         return null;
+    }
+
+    public void prefixHelper(ArrayList<String> list){
+        
     }
 
     /**
